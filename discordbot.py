@@ -62,7 +62,7 @@ async def on_message(message):
                 text = message.content
 
                 # Add author's name
-                text = message.author.name + '、' + text
+                text = message.author.nickname + '、' + text
 
                 # Replace new line
                 text = text.replace('\n', '、')
@@ -140,7 +140,7 @@ async def on_voice_state_update(member, before, after):
                 await after.channel.connect()
             else:
                 if member.guild.voice_client.channel is after.channel:
-                    text = member.name + 'さんが入室しました'
+                    text = member.nickname + 'さんが入室しました'
                     s_quote = urllib.parse.quote(text)
                     mp3url = f'http://translate.google.com/translate_tts?ie=UTF-8&q={s_quote}&tl={lang}&client=tw-ob'
                     while member.guild.voice_client.is_playing():
@@ -157,7 +157,7 @@ async def on_voice_state_update(member, before, after):
                         await asyncio.sleep(0.5)
                         await member.guild.voice_client.disconnect()
                     else:
-                        text = member.name + 'さんが退室しました'
+                        text = member.nickname + 'さんが退室しました'
                         s_quote = urllib.parse.quote(text)
                         mp3url = f'http://translate.google.com/translate_tts?ie=UTF-8&q={s_quote}&tl={lang}&client=tw-ob'
                         while member.guild.voice_client.is_playing():
